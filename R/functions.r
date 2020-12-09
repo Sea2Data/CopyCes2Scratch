@@ -234,7 +234,8 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
           for(file in list.files(raw,full.names = T)){
             if(file.exists(file) && !dir.exists(file)){
               if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))){
-                file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))
+                if(!grepl('SX93',file)){
+                file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))}
               }
             }
           }
