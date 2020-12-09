@@ -126,7 +126,8 @@ data_diagnose <- function(dir = '//ces.hi.no/cruise_data',survey = NULL){
 
     if(!is.null(CES_path)){
       if(length(CES_path)==1){
-      print('Cruise found')}else(print('multiple cruises found'))}else(print('No cruises found'))
+      print('Cruise found')}else(print('multiple cruises found')
+                                 print(CES_path))}else(print('No cruises found'))
 
 
 
@@ -422,11 +423,9 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
   #if this is a linux
 
   ces_folder <- '//ces.hi.no/cruise_data/'
-  os_ <- T
 
   if(Sys.info()['sysname']!='Windows'){
     dir<-gsub("//ces.hi.no", "//data", dir)
-    os_ <- F
     ces_folder <- '//data/cruise_data/'
   }
 
@@ -525,8 +524,7 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
 
 
     #Check if git is avaliable on server and on data
-    if(os_==T){
-      if(system(sprintf("git ls-remote \"%s\"",paste0('https://git.imr.no/lsss_interpretationmask/',basename(CES_path),'.git')))==0)exist_remote <- T}
+      if(system(sprintf("git ls-remote \"%s\"",paste0('https://git.imr.no/lsss_interpretationmask/',basename(CES_path),'.git')))==0)exist_remote <- T
 
     if(system('git branch')==0) exist_local <- T
 
@@ -583,7 +581,6 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
         system('git add .')
         system(paste0('git commit -m ',work_folder))
 
-        if(os_==T){
           if(!exist_remote){
             print('Creating new remote repository')
             system(paste0("git remote add ",basename(CES_path) , ' ',paste0('https://git.imr.no/lsss_interpretationmask/',basename(CES_path),'.git') ))
@@ -592,7 +589,6 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
           #Commit changes to remote
           print('Push to remote')
           system(paste0('git push ', basename(CES_path),' master'))
-        }
       }
 
     }
