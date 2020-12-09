@@ -39,7 +39,7 @@ filter_rawfolder <- function(raw_folders){
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("POSTGRESQL",x,value=FALSE))) == 0]
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep('S2017208_PJOHANHJORT_1019/ACOUSTIC_DATA/EK80/EK80_RAWDATA',x,value=FALSE))) == 0]
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep('S2018207_PJOHANHJORT_1019/ACOUSTIC/EK80/EK80_ORIGINALRAWDATA',x,value=FALSE))) == 0]
-
+  raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep('S2018829_PKINGSBAY_2142/ACOUSTIC/EK80/EK80_ORIGINALRAWDATA',x,value=FALSE))) == 0]
 
   #special cases
   raw_folders<-raw_folders[lapply(raw_folders,
