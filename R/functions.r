@@ -98,8 +98,14 @@ filter_workfolder <- function(work_folders){
 #' @param infile Path to the input file
 #' @return A matrix of the infile
 #' @export
-data_diagnose <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey = NULL){
+data_diagnose <- function(dir = '//ces.hi.no/cruise_data',survey = NULL){
 
+
+
+
+  if(Sys.info()['sysname']!='Windows'){
+    dir<-gsub("//ces.hi.no", "//data", dir)
+  }
 
 
   for (i in 1:nrow((survey))){
@@ -108,14 +114,19 @@ data_diagnose <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',sur
     year <- survey[i,]$Year
     Cruise <- survey[i,]$Cruise
 
+    print(paste0('Cecking cruise: ', Cruise))
 
     #Get path of the survey
-    if(any((grepl(Cruise, list.dirs(path=paste0(ces_folder,year),recursive = F))))){
-      CES_path <- (grep(Cruise, list.dirs(path=paste0(ces_folder,year),recursive = F), value=TRUE))
-    }else if(any((grepl(Cruise, list.dirs(path=paste0(ces_folder,year,'/staging'),recursive = F))))){
-      CES_path <- (grep(Cruise, list.dirs(path=paste0(ces_folder,year,'/staging'),recursive = F), value=TRUE))
+    if(any((grepl(Cruise, list.dirs(path=file.path(dir,year),recursive = F))))){
+      CES_path <- (grep(Cruise, list.dirs(path=file.path(dir,year),recursive = F), value=TRUE))
+    }else if(any((grepl(Cruise, list.dirs(path=file.path(dir,year,'/staging'),recursive = F))))){
+      CES_path <- (grep(Cruise, list.dirs(path=file.path(dir,year,'/staging'),recursive = F), value=TRUE))
     }else{CES_path <- NULL}
 
+
+    if(!is.null(CES_path)){
+      if(length(CES_path)==1){
+      print('Cruise found')}else(print('multiple cruises found'))}else(print('No cruises found'))
 
 
 
@@ -217,8 +228,6 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
           }
         }
       }
-#
-#
 #       #Special case
 #       else if(any(Cruise%in%c('2020818','2019809','2020802','2020803'))){
 #         if(grepl("EK80_ORIGINALRAWDATA",raw,fixed=TRUE)){
