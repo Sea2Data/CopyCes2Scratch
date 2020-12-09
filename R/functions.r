@@ -98,7 +98,7 @@ filter_workfolder <- function(work_folders){
 #' @param infile Path to the input file
 #' @return A matrix of the infile
 #' @export
-data_diagnose <- function(dir = '//ces.hi.no/mea/2018_Redus/CleenCes',survey = NULL){
+data_diagnose <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey = NULL){
 
 
 
@@ -110,10 +110,10 @@ data_diagnose <- function(dir = '//ces.hi.no/mea/2018_Redus/CleenCes',survey = N
 
 
     #Get path of the survey
-    if(any((grepl(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year),recursive = F))))){
-      CES_path <- (grep(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year),recursive = F), value=TRUE))
-    }else if(any((grepl(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year,'/staging'),recursive = F))))){
-      CES_path <- (grep(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year,'/staging'),recursive = F), value=TRUE))
+    if(any((grepl(Cruise, list.dirs(path=paste0(ces_folder,year),recursive = F))))){
+      CES_path <- (grep(Cruise, list.dirs(path=paste0(ces_folder,year),recursive = F), value=TRUE))
+    }else if(any((grepl(Cruise, list.dirs(path=paste0(ces_folder,year,'/staging'),recursive = F))))){
+      CES_path <- (grep(Cruise, list.dirs(path=paste0(ces_folder,year,'/staging'),recursive = F), value=TRUE))
     }else{CES_path <- NULL}
 
 
@@ -152,7 +152,20 @@ data_diagnose <- function(dir = '//ces.hi.no/mea/2018_Redus/CleenCes',survey = N
 #'
 #' @param dir Path to the scratch disc
 #' @export
-copydata <- function(dir = '//ces.hi.no/mea/2018_Redus/CleenCes',survey = NULL){
+copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey = NULL){
+
+
+  #if this is a linux
+
+  ces_folder <- '//ces.hi.no/cruise_data/'
+
+  if(Sys.info()['sysname']!='Windows'){
+    dir<-gsub("//ces.hi.no", "data", dir)
+
+    ces_folder <- '//data/cruise_data/'
+  }
+
+
 
 
   library(reshape2)
@@ -484,10 +497,10 @@ copydata <- function(dir = '//ces.hi.no/mea/2018_Redus/CleenCes',survey = NULL){
 
     #Get path of the survey
     print('get path of the survey')
-    if(any((grepl(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year),recursive = F))))){
-      CES_path <- (grep(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year),recursive = F), value=TRUE))
-    }else if(any((grepl(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year,'/staging'),recursive = F))))){
-      CES_path <- (grep(Cruise, list.dirs(path=paste0('//ces.hi.no/cruise_data/',year,'/staging'),recursive = F), value=TRUE))
+    if(any((grepl(Cruise, list.dirs(path=paste0(ces_folder,year),recursive = F))))){
+      CES_path <- (grep(Cruise, list.dirs(path=paste0(ces_folder,year),recursive = F), value=TRUE))
+    }else if(any((grepl(Cruise, list.dirs(path=paste0(ces_folder,year,'/staging'),recursive = F))))){
+      CES_path <- (grep(Cruise, list.dirs(path=paste0(ces_folder,year,'/staging'),recursive = F), value=TRUE))
     }else{CES_path <- NULL}
 
 
