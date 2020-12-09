@@ -37,6 +37,7 @@ filter_rawfolder <- function(raw_folders){
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("2013842_sh90",x,value=FALSE))) == 0]
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("BIOLOGICAL_DATA",x,value=FALSE))) == 0]
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("POSTGRESQL",x,value=FALSE))) == 0]
+  raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep('S2017208_PJOHANHJORT_1019/ACOUSTIC_DATA/EK80/EK80_RAWDATA',x,value=FALSE))) == 0]
 
 
   #special cases
