@@ -185,23 +185,23 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
       #Print msg for the user
       print(paste0('Copying from: ',raw))
 
-#
-#
-#       #Special case
-#       if(Cruise=='2017840'){
-#         if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60',sep='/')))
-#         if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',sep='/')))
-#         if(raw != "\\\\ces.hi.no/cruise_data/2017/S2017840_PVENDLA_3206/201840"){
-#           #Copy each file
-#           for(file in list.files(raw,full.names = T)){
-#             if(file.exists(file) && !dir.exists(file)){
-#               if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))){
-#                 file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))
-#               }
-#             }
-#           }
-#         }
-#       }
+
+
+      #Special case
+      if(Cruise=='2017840'){
+        if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60',sep='/')))
+        if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',sep='/')))
+        if(raw != "\\\\ces.hi.no/cruise_data/2017/S2017840_PVENDLA_3206/201840"){
+          #Copy each file
+          for(file in list.files(raw,full.names = T)){
+            if(file.exists(file) && !dir.exists(file)){
+              if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))){
+                file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))
+              }
+            }
+          }
+        }
+      }
 #
 #
 #
@@ -290,7 +290,7 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
 #       }
 # }}
 #       #General case
-#       else{
+      else{
 
 
         if(grepl("EK60_RAWDATA",raw,fixed=TRUE)){
@@ -407,7 +407,7 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
         }
 
         else{ print('Did not copy')}
-      # }
+      }
     }
 
   }
