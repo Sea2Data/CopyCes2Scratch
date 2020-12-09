@@ -90,6 +90,26 @@ filter_workfolder <- function(work_folders){
 
 
 
+# mapper <- function(){
+#   mapp <- c()
+#   mapp$survey <- 2016834
+#   mapp$from <- "ACOUSTIC_DATA/EK60/EK60_RAWDATA/BAK"
+#   mapp$to <- "ACOUSTIC/EK60/EK60_RAWDATA"
+#
+#
+#   data.table::as.data.table(c(survey=2017840,from='asdf',to='asdf'))
+#
+#   mapp<-as.data.frame(mapp)
+#   rbind(mapp)
+#   as.data.frame(c(survey=2017840,from='asdf',to='asdf'))
+#   2020818
+#   2018830
+#   2018831
+#   2017840
+#
+# }
+
+
 
 #' Load a Matrix
 #'
@@ -233,6 +253,31 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
             }
           }
         }
+      }
+      else if(Cruise=='2017208'){
+        if(grepl("EK60RRAWFORMAT",raw,fixed=TRUE)){
+                    if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80',sep='/')))
+                    if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_RAWDATA',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_RAWDATA',sep='/')))
+                    for(file in list.files(raw,full.names = T)){
+                      if(file.exists(file) && !dir.exists(file)){
+                        if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_RAWDATA',basename(file),sep='/'))){
+                          file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_RAWDATA',basename(file),sep='/'))
+                        }
+                      }
+                    }
+        }
+        if(grepl("EK80_RAWDATA",raw,fixed=TRUE)){
+          if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80',sep='/')))
+          if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_ORIGINALRAWDATA',sep='/')))dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_ORIGINALRAWDATA',sep='/')))
+          for(file in list.files(raw,full.names = T)){
+            if(file.exists(file) && !dir.exists(file)){
+              if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_ORIGINALRAWDATA',basename(file),sep='/'))){
+                file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK80_ORIGINALRAWDATA',basename(file),sep='/'))
+              }
+            }
+          }
+        }
+
       }
 #       #Special case
 #       else if(any(Cruise%in%c('2020818','2019809','2020802','2020803'))){
