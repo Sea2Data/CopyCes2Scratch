@@ -279,6 +279,24 @@ copydata <- function(dir = '//ces.hi.no/mea/scratch/CRIMAC_survey_data',survey =
         }
 
       }
+      else if(Cruise=='2020818'){
+        if(grepl("EK60_ORIGINALRAWDATA",raw,fixed=TRUE)){
+
+            if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60',sep='/'))){
+              dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60',sep='/')))
+              }
+            if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',sep='/'))){
+              dir.create(file.path(paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',sep='/')))
+              }
+            for(file in list.files(raw,full.names = T)){
+              if(file.exists(file) && !dir.exists(file)){
+                if(!file.exists(paste(dir,year,basename(CES_path),'ACOUSTIC','EK80','EK60_RAWDATA',basename(file),sep='/'))){
+                  file.copy(from=file, to=paste(dir,year,basename(CES_path),'ACOUSTIC','EK60','EK60_RAWDATA',basename(file),sep='/'))
+                }
+              }
+                    }
+        }
+      }
 #       #Special case
 #       else if(any(Cruise%in%c('2020818','2019809','2020802','2020803'))){
 #         if(grepl("EK80_ORIGINALRAWDATA",raw,fixed=TRUE)){
