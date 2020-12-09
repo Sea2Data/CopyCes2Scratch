@@ -35,6 +35,8 @@ filter_rawfolder <- function(raw_folders){
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("EXPERIMENTS",x,value=FALSE))) == 0]
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("lsss",x,value=FALSE))) == 0]
   raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("2013842_sh90",x,value=FALSE))) == 0]
+  raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("BIOLOGICAL_DATA",x,value=FALSE))) == 0]
+  raw_folders<-raw_folders[lapply(raw_folders,function(x) length(grep("POSTGRESQL",x,value=FALSE))) == 0]
 
 
   #special cases
@@ -82,6 +84,7 @@ filter_workfolder <- function(work_folders){
   work_folders<-work_folders[lapply(work_folders,function(x) length(grep("EXPERIMENTS",x,value=FALSE))) == 0]
   work_folders<-work_folders[lapply(work_folders,function(x) length(grep("profos",x,value=FALSE))) == 0]
   work_folders<-work_folders[lapply(work_folders,function(x) length(grep("promos",x,value=FALSE))) == 0]
+  work_folders<-work_folders[lapply(work_folders,function(x) length(grep("CRUISE_DOCUMENTS",x,value=FALSE))) == 0]
   return(work_folders)
 }
 
