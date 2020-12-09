@@ -128,9 +128,9 @@ data_diagnose <- function(dir = '//ces.hi.no/cruise_data',survey = NULL){
 
 
     if(!is.null(CES_path)){
-      if(length(CES_path)==1){
-      print('Cruise found')}else(print('multiple cruises found')
-                                 print(CES_path))}else(print('No cruises found'))
+      print(paste0('Number of cruises found: ',length(CES_path)))
+        }
+      else{print('No cruises found')}
 
 
 
@@ -152,6 +152,8 @@ data_diagnose <- function(dir = '//ces.hi.no/cruise_data',survey = NULL){
     print(lsss_folders)
     print('WORK:')
     print(work_folders)
+    print('')
+    print('')
 
 
   }
